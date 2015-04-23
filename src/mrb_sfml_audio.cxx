@@ -2,6 +2,7 @@
 #include <mruby/class.h>
 #include <SFML/Audio.hpp>
 #include "mrb_al_resource.hxx"
+#include "mrb_sound_buffer.hxx"
 #include "mrb_sound_source.hxx"
 #include "mrb_sound_stream.hxx"
 
