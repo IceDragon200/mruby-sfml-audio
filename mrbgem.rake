@@ -6,5 +6,5 @@ MRuby::Gem::Specification.new('mruby-sfml-audio') do |spec|
   spec.description = 'SFML Audio binding'
   spec.homepage = 'https://github.com/IceDragon200/mruby-sfml-audio'
 
-  spec.add_dependency 'mruby-sfml-system'
+  spec.add_dependency 'mruby-sfml-system', github: 'IceDragon200/mruby-sfml-system'
 end
