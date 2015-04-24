@@ -14,6 +14,9 @@ static struct RClass *music_class;
 static mrb_data_free_func music_free = cxx_mrb_data_free<sf::Music>;
 extern "C" const struct mrb_data_type mrb_sfml_music_type = { "sf::Music", music_free };
 
+/* @!class SFML::Music
+ * @!method initialize
+ */
 static mrb_value
 music_initialize(mrb_state *mrb, mrb_value self)
 {
@@ -22,6 +25,10 @@ music_initialize(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::Music
+ * @!method open_from_file(filename)
+ *   @param [String] filename
+ */
 static mrb_value
 music_open_from_file(mrb_state *mrb, mrb_value self)
 {
@@ -31,6 +38,10 @@ music_open_from_file(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::Music
+ * @!method get_duration
+ *   @return [Time]
+ */
 static mrb_value
 music_get_duration(mrb_state *mrb, mrb_value self)
 {

@@ -1,4 +1,4 @@
 module SFML
-  class SoundStream
+  class SoundStream < SoundSource
   end
 end

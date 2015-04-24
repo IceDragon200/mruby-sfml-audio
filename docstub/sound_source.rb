@@ -1,4 +1,4 @@
 module SFML
-  class SoundSource
+  class SoundSource < AlResource
   end
 end

@@ -3,7 +3,7 @@
 //#include <SFML/Audio/AlResource.hpp>
 #include "mrb_al_resource.hxx"
 
-/* @class SFML::AlResource
+/* @!class SFML::AlResource
  * @abstract
  */
 extern "C" void

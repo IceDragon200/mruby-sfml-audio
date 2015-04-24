@@ -6,6 +6,8 @@
 #include "mrb_music.hxx"
 #include "mrb_sound.hxx"
 #include "mrb_sound_buffer.hxx"
+#include "mrb_sound_buffer_recorder.hxx"
+#include "mrb_sound_recorder.hxx"
 #include "mrb_sound_source.hxx"
 #include "mrb_sound_stream.hxx"
 
@@ -23,6 +25,8 @@ mrb_mruby_sfml_audio_gem_init(mrb_state *mrb)
   mrb_sfml_music_init_bind(mrb, sfml_module);
   mrb_sfml_sound_init_bind(mrb, sfml_module);
   mrb_sfml_sound_buffer_init_bind(mrb, sfml_module);
+  mrb_sfml_sound_recorder_init_bind(mrb, sfml_module);
+  mrb_sfml_sound_buffer_recorder_init_bind(mrb, sfml_module);
 }
 
 extern "C" void

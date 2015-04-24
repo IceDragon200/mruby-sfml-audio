@@ -13,6 +13,15 @@ static struct RClass *sound_buffer_class;
 static mrb_data_free_func sound_buffer_free = cxx_mrb_data_free<sf::SoundBuffer>;
 extern "C" const struct mrb_data_type mrb_sfml_sound_buffer_type = { "sf::SoundBuffer", sound_buffer_free };
 
+extern "C" mrb_value
+mrb_sfml_sound_buffer_value(mrb_state *mrb, const sf::SoundBuffer& source)
+{
+  mrb_value result = mrb_obj_new(mrb, sound_buffer_class, 0, NULL);
+  sf::SoundBuffer *target = mrb_sfml_sound_buffer_ptr(mrb, result);
+  *target = source;
+  return result;
+}
+
 static mrb_value
 sound_buffer_initialize(mrb_state *mrb, mrb_value self)
 {
@@ -25,6 +34,16 @@ sound_buffer_initialize(mrb_state *mrb, mrb_value self)
     sound_buffer = new sf::SoundBuffer();
   }
   mrb_data_init(self, sound_buffer, &mrb_sfml_sound_buffer_type);
+  return self;
+}
+
+static mrb_value
+sound_buffer_initialize_copy(mrb_state *mrb, mrb_value self)
+{
+  sf::SoundBuffer *other;
+  mrb_get_args(mrb, "d", &other, &mrb_sfml_sound_buffer_type);
+  sound_buffer_free(mrb, DATA_PTR(self));
+  mrb_data_init(self, new sf::SoundBuffer(*other), &mrb_sfml_sound_buffer_type);
   return self;
 }
 
@@ -77,6 +96,7 @@ mrb_sfml_sound_buffer_init_bind(mrb_state *mrb, struct RClass *mod)
   MRB_SET_INSTANCE_TT(sound_buffer_class, MRB_TT_DATA);
 
   mrb_define_method(mrb, sound_buffer_class, "initialize",        sound_buffer_initialize,        MRB_ARGS_OPT(1));
+  mrb_define_method(mrb, sound_buffer_class, "initialize_copy",   sound_buffer_initialize_copy,   MRB_ARGS_REQ(1));
   mrb_define_method(mrb, sound_buffer_class, "load_from_file",    sound_buffer_load_from_file,    MRB_ARGS_REQ(1));
   mrb_define_method(mrb, sound_buffer_class, "save_to_file",      sound_buffer_save_to_file,      MRB_ARGS_REQ(1));
   mrb_define_method(mrb, sound_buffer_class, "get_sample_count",  sound_buffer_get_sample_count,  MRB_ARGS_NONE());

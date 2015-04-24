@@ -6,6 +6,7 @@
 #include <SFML/Audio/SoundBuffer.hpp>
 
 extern "C" const struct mrb_data_type mrb_sfml_sound_buffer_type;
+extern "C" mrb_value mrb_sfml_sound_buffer_value(mrb_state*, const sf::SoundBuffer&);
 
 static inline sf::SoundBuffer*
 mrb_sfml_sound_buffer_ptr(mrb_state *mrb, mrb_value self)
