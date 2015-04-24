@@ -17,6 +17,27 @@ static mrb_data_free_func sound_free = cxx_mrb_data_free<sf::Sound>;
 extern "C" const struct mrb_data_type mrb_sfml_sound_type = { "sf::Sound", sound_free };
 
 static mrb_value
+get_mrb_sound_buffer(mrb_state *mrb, mrb_value self)
+{
+  return mrb_iv_get(mrb, self, mrb_intern_lit(mrb, "__sfml_sound_buffer"));
+}
+
+static mrb_value
+set_mrb_sound_buffer(mrb_state *mrb, mrb_value self, mrb_value val)
+{
+  mrb_iv_set(mrb, self, mrb_intern_lit(mrb, "__sfml_sound_buffer"), val);
+  return self;
+}
+
+/* @!class SFML::Sound
+ * @!method initialize
+ *   @overload initialize
+ *   @overload initialize(sound)
+ *     @param [SFML::Sound] sound
+ *   @overload initialize(sound_buffer)
+ *     @param [SFML::SoundBuffer] sound_buffer
+ */
+static mrb_value
 sound_initialize(mrb_state *mrb, mrb_value self)
 {
   sf::Sound *sound;
@@ -28,8 +49,10 @@ sound_initialize(mrb_state *mrb, mrb_value self)
     cxx_mrb_ensure_type_data(mrb, obj);
     if (DATA_TYPE(obj) == &mrb_sfml_sound_type) {
       sound = new sf::Sound(*mrb_sfml_sound_ptr(mrb, obj));
+      set_mrb_sound_buffer(mrb, self, get_mrb_sound_buffer(mrb, obj));
     } else if (DATA_TYPE(obj) == &mrb_sfml_sound_buffer_type) {
       sound = new sf::Sound(*mrb_sfml_sound_buffer_ptr(mrb, obj));
+      set_mrb_sound_buffer(mrb, self, obj);
     } else {
       mrb_raise(mrb, E_TYPE_ERROR, "expected SFML::Sound or SFML::SoundBuffer.");
       return mrb_nil_value();
@@ -43,6 +66,24 @@ sound_initialize(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::Sound
+ * @!method initialize_copy(other)
+ *   @param [SFML::Sound] other
+ */
+static mrb_value
+sound_initialize_copy(mrb_state *mrb, mrb_value self)
+{
+  mrb_value obj;
+  mrb_get_args(mrb, "o", &obj);
+  sound_free(mrb, DATA_PTR(self));
+  mrb_data_init(self, new sf::Sound(*mrb_sfml_sound_ptr(mrb, obj)), &mrb_sfml_sound_type);
+  set_mrb_sound_buffer(mrb, self, get_mrb_sound_buffer(mrb, obj));
+  return self;
+}
+
+/* @!class SFML::Sound
+ * @!method play
+ */
 static mrb_value
 sound_play(mrb_state *mrb, mrb_value self)
 {
@@ -50,6 +91,9 @@ sound_play(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::Sound
+ * @!method pause
+ */
 static mrb_value
 sound_pause(mrb_state *mrb, mrb_value self)
 {
@@ -57,6 +101,9 @@ sound_pause(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::Sound
+ * @!method stop
+ */
 static mrb_value
 sound_stop(mrb_state *mrb, mrb_value self)
 {
@@ -64,16 +111,24 @@ sound_stop(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::Sound
+ * @!method set_buffer(sound_buffer)
+ *   @param [SFML::SoundBuffer] sound_buffer
+ */
 static mrb_value
 sound_set_buffer(mrb_state *mrb, mrb_value self)
 {
   mrb_value buffer_obj;
   mrb_get_args(mrb, "o", &buffer_obj);
   mrb_sfml_sound_ptr(mrb, self)->setBuffer(*mrb_sfml_sound_buffer_ptr(mrb, buffer_obj));
-  mrb_iv_set(mrb, self, mrb_intern_lit(mrb, "__sfml_sound_buffer"), buffer_obj);
+  set_mrb_sound_buffer(mrb, self, buffer_obj);
   return self;
 }
 
+/* @!class SFML::Sound
+ * @!method set_loop(state)
+ *   @param [Boolean] state
+ */
 static mrb_value
 sound_set_loop(mrb_state *mrb, mrb_value self)
 {
@@ -83,6 +138,10 @@ sound_set_loop(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::Sound
+ * @!method set_playing_offset(offset)
+ *   @param [SFML::Time] offset
+ */
 static mrb_value
 sound_set_playing_offset(mrb_state *mrb, mrb_value self)
 {
@@ -92,30 +151,50 @@ sound_set_playing_offset(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::Sound
+ * @!method get_buffer
+ *   @return [SFML::SoundBuffer]
+ */
 static mrb_value
 sound_get_buffer(mrb_state *mrb, mrb_value self)
 {
-  return mrb_iv_get(mrb, self, mrb_intern_lit(mrb, "__sfml_sound_buffer"));
+  return get_mrb_sound_buffer(mrb, self);
 }
 
+/* @!class SFML::Sound
+ * @!method get_loop
+ *   @return [Boolean]
+ */
 static mrb_value
 sound_get_loop(mrb_state *mrb, mrb_value self)
 {
   return mrb_bool_value(mrb_sfml_sound_ptr(mrb, self)->getLoop());
 }
 
+/* @!class SFML::Sound
+ * @!method get_playing_offset
+ *   @return [SFML::Time]
+ */
 static mrb_value
 sound_get_playing_offset(mrb_state *mrb, mrb_value self)
 {
   return mrb_sfml_time_value(mrb, mrb_sfml_sound_ptr(mrb, self)->getPlayingOffset());
 }
 
+/* @!class SFML::Sound
+ * @!method get_status
+ *   @return [SoundSource::Status]
+ */
 static mrb_value
 sound_get_status(mrb_state *mrb, mrb_value self)
 {
   return mrb_fixnum_value(mrb_sfml_sound_ptr(mrb, self)->getStatus());
 }
 
+/* @!class SFML::Sound
+ * @!method reset_buffer
+ *   @return [self]
+ */
 static mrb_value
 sound_reset_buffer(mrb_state *mrb, mrb_value self)
 {
@@ -123,6 +202,8 @@ sound_reset_buffer(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::Sound
+ */
 extern "C" void
 mrb_sfml_sound_init_bind(mrb_state *mrb, struct RClass *mod)
 {
@@ -131,6 +212,7 @@ mrb_sfml_sound_init_bind(mrb_state *mrb, struct RClass *mod)
 
   mrb_sfml_sound_source_bind_class<sf::Sound>(mrb, sound_class);
   mrb_define_method(mrb, sound_class, "initialize",         sound_initialize,         MRB_ARGS_OPT(1));
+  mrb_define_method(mrb, sound_class, "initialize_copy",    sound_initialize_copy,    MRB_ARGS_REQ(1));
   mrb_define_method(mrb, sound_class, "play",               sound_play,               MRB_ARGS_NONE());
   mrb_define_method(mrb, sound_class, "pause",              sound_pause,              MRB_ARGS_NONE());
   mrb_define_method(mrb, sound_class, "stop",               sound_stop,               MRB_ARGS_NONE());
@@ -143,6 +225,11 @@ mrb_sfml_sound_init_bind(mrb_state *mrb, struct RClass *mod)
   mrb_define_method(mrb, sound_class, "get_status",         sound_get_status,         MRB_ARGS_NONE());
   mrb_define_method(mrb, sound_class, "reset_buffer",       sound_reset_buffer,       MRB_ARGS_NONE());
 
-  mrb_define_alias(mrb, sound_class, "loop=", "set_loop");
-  mrb_define_alias(mrb, sound_class, "loop?", "get_loop");
+  mrb_define_alias(mrb, sound_class, "buffer=",         "set_buffer");
+  mrb_define_alias(mrb, sound_class, "loop=",           "set_loop");
+  mrb_define_alias(mrb, sound_class, "playing_offset=", "set_playing_offset");
+  mrb_define_alias(mrb, sound_class, "buffer",          "get_buffer");
+  mrb_define_alias(mrb, sound_class, "loop?",           "get_loop");
+  mrb_define_alias(mrb, sound_class, "playing_offset",  "get_playing_offset");
+  mrb_define_alias(mrb, sound_class, "status",          "get_status");
 }
