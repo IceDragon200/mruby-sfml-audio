@@ -1,4 +1,5 @@
 module SFML
+  # Abstract base class for streamed audio sources
   class SoundStream < SoundSource
     # @return [self]
     def play

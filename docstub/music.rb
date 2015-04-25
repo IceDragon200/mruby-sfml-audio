@@ -1,4 +1,5 @@
 module SFML
+  # Streamed music played from an audio file.
   class Music < SoundStream
     def initialize
     end

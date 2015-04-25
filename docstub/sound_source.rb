@@ -1,6 +1,7 @@
 module SFML
+  # Base class defining a sound's properties
   class SoundSource < AlResource
-    # Whether the sound is stopped, paused or currently playing.
+    # Enumeration of the sound source states
     module Status
       # @return [Integer]
       Stopped = 0

@@ -36,6 +36,7 @@ set_mrb_sound_buffer(mrb_state *mrb, mrb_value self, mrb_value val)
  *     @param [SFML::Sound] sound
  *   @overload initialize(sound_buffer)
  *     @param [SFML::SoundBuffer] sound_buffer
+ *   @return [self]
  */
 static mrb_value
 sound_initialize(mrb_state *mrb, mrb_value self)
@@ -69,6 +70,7 @@ sound_initialize(mrb_state *mrb, mrb_value self)
 /* @!class SFML::Sound
  * @!method initialize_copy(other)
  *   @param [SFML::Sound] other
+ *   @return [self]
  */
 static mrb_value
 sound_initialize_copy(mrb_state *mrb, mrb_value self)
@@ -83,6 +85,7 @@ sound_initialize_copy(mrb_state *mrb, mrb_value self)
 
 /* @!class SFML::Sound
  * @!method play
+ *   @return [self]
  */
 static mrb_value
 sound_play(mrb_state *mrb, mrb_value self)
@@ -93,6 +96,7 @@ sound_play(mrb_state *mrb, mrb_value self)
 
 /* @!class SFML::Sound
  * @!method pause
+ *   @return [self]
  */
 static mrb_value
 sound_pause(mrb_state *mrb, mrb_value self)
@@ -103,6 +107,7 @@ sound_pause(mrb_state *mrb, mrb_value self)
 
 /* @!class SFML::Sound
  * @!method stop
+ *   @return [self]
  */
 static mrb_value
 sound_stop(mrb_state *mrb, mrb_value self)
@@ -114,6 +119,7 @@ sound_stop(mrb_state *mrb, mrb_value self)
 /* @!class SFML::Sound
  * @!method set_buffer(sound_buffer)
  *   @param [SFML::SoundBuffer] sound_buffer
+ *   @return [self]
  */
 static mrb_value
 sound_set_buffer(mrb_state *mrb, mrb_value self)
@@ -128,6 +134,7 @@ sound_set_buffer(mrb_state *mrb, mrb_value self)
 /* @!class SFML::Sound
  * @!method set_loop(state)
  *   @param [Boolean] state
+ *   @return [self]
  */
 static mrb_value
 sound_set_loop(mrb_state *mrb, mrb_value self)
@@ -141,6 +148,7 @@ sound_set_loop(mrb_state *mrb, mrb_value self)
 /* @!class SFML::Sound
  * @!method set_playing_offset(offset)
  *   @param [SFML::Time] offset
+ *   @return [self]
  */
 static mrb_value
 sound_set_playing_offset(mrb_state *mrb, mrb_value self)

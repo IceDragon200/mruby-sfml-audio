@@ -1,4 +1,5 @@
 module SFML
+  # The listener.
   module Listener
     # @param [Float] volume
     def self.set_global_volume(volume)

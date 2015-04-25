@@ -22,6 +22,13 @@ mrb_sfml_sound_buffer_value(mrb_state *mrb, const sf::SoundBuffer& source)
   return result;
 }
 
+/* @!class SFML::SoundBuffer
+ * @!method initialize
+ *   @overload initialize
+ *   @overload initialize(sound_buffer)
+ *     @param [SFML::SoundBuffer] sound_buffer
+ *   @return [self]
+ */
 static mrb_value
 sound_buffer_initialize(mrb_state *mrb, mrb_value self)
 {
@@ -37,6 +44,11 @@ sound_buffer_initialize(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::SoundBuffer
+ * @!method initialize_copy(other)
+ *   @param [SFML::SoundBuffer] other
+ *   @return [self]
+ */
 static mrb_value
 sound_buffer_initialize_copy(mrb_state *mrb, mrb_value self)
 {
@@ -47,6 +59,11 @@ sound_buffer_initialize_copy(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::SoundBuffer
+ * @!method load_from_file(filename)
+ *   @param [String] filename
+ *   @return [self]
+ */
 static mrb_value
 sound_buffer_load_from_file(mrb_state *mrb, mrb_value self)
 {
@@ -56,6 +73,11 @@ sound_buffer_load_from_file(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::SoundBuffer
+ * @!method save_to_file(filename)
+ *   @param [String] filename
+ *   @return [self]
+ */
 static mrb_value
 sound_buffer_save_to_file(mrb_state *mrb, mrb_value self)
 {
@@ -65,30 +87,48 @@ sound_buffer_save_to_file(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::SoundBuffer
+ * @!method get_sample_count
+ *   @return [Integer]
+ */
 static mrb_value
 sound_buffer_get_sample_count(mrb_state *mrb, mrb_value self)
 {
   return mrb_fixnum_value(mrb_sfml_sound_buffer_ptr(mrb, self)->getSampleCount());
 }
 
+/* @!class SFML::SoundBuffer
+ * @!method get_sample_rate
+ *   @return [Integer]
+ */
 static mrb_value
 sound_buffer_get_sample_rate(mrb_state *mrb, mrb_value self)
 {
   return mrb_fixnum_value(mrb_sfml_sound_buffer_ptr(mrb, self)->getSampleRate());
 }
 
+/* @!class SFML::SoundBuffer
+ * @!method get_channel_count
+ *   @return [Integer]
+ */
 static mrb_value
 sound_buffer_get_channel_count(mrb_state *mrb, mrb_value self)
 {
   return mrb_fixnum_value(mrb_sfml_sound_buffer_ptr(mrb, self)->getChannelCount());
 }
 
+/* @!class SFML::SoundBuffer
+ * @!method get_duration
+ *   @return [SFML::Time]
+ */
 static mrb_value
 sound_buffer_get_duration(mrb_state *mrb, mrb_value self)
 {
   return mrb_sfml_time_value(mrb, mrb_sfml_sound_buffer_ptr(mrb, self)->getDuration());
 }
 
+/* @!class SFML::SoundBuffer
+ */
 extern "C" void
 mrb_sfml_sound_buffer_init_bind(mrb_state *mrb, struct RClass *mod)
 {

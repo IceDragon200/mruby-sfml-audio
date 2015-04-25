@@ -1,4 +1,5 @@
 module SFML
+  # Regular sound that can be played in the audio environment
   class Sound < SoundSource
     # @overload initialize
     # @overload initialize(sound)

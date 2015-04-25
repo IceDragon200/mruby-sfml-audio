@@ -12,6 +12,10 @@ static struct RClass *sound_buffer_recorder_class;
 static mrb_data_free_func sound_buffer_recorder_free = cxx_mrb_data_free<sf::SoundBufferRecorder>;
 extern "C" const struct mrb_data_type mrb_sfml_sound_buffer_recorder_type = { "sf::SoundBufferRecorder", sound_buffer_recorder_free };
 
+/* @!class SFML::SoundBufferRecorder
+ * @!method initialize
+ *   @return [self]
+ */
 static mrb_value
 sound_buffer_recorder_initialize(mrb_state *mrb, mrb_value self)
 {
@@ -20,12 +24,18 @@ sound_buffer_recorder_initialize(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::SoundBufferRecorder
+ * @!method get_buffer
+ *   @return [SFML::SoundBuffer]
+ */
 static mrb_value
 sound_buffer_recorder_get_buffer(mrb_state *mrb, mrb_value self)
 {
   return mrb_sfml_sound_buffer_value(mrb, mrb_sfml_sound_buffer_recorder_ptr(mrb, self)->getBuffer());
 }
 
+/* @!class SFML::SoundBufferRecorder
+ */
 extern "C" void
 mrb_sfml_sound_buffer_recorder_init_bind(mrb_state *mrb, struct RClass *mod)
 {

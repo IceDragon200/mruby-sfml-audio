@@ -18,6 +18,11 @@ get_sound_source(mrb_state *mrb, mrb_value self)
   return cxx_mrb_data_get_ptr<T>(mrb, self);
 }
 
+/* @!class SFML::SoundSource<T>
+ * @!method set_pitch(pitch)
+ *   @param [Float] pitch
+ *   @return [self]
+ */
 template <class T>
 static mrb_value
 sound_source_set_pitch(mrb_state *mrb, mrb_value self)
@@ -28,6 +33,11 @@ sound_source_set_pitch(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::SoundSource<T>
+ * @!method set_volume(volume)
+ *   @param [Float] volume
+ *   @return [self]
+ */
 template <class T>
 static mrb_value
 sound_source_set_volume(mrb_state *mrb, mrb_value self)
@@ -38,6 +48,16 @@ sound_source_set_volume(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::SoundSource<T>
+ * @!method set_position
+ *   @overload set_position(position)
+ *     @param [SFML::Vector3f] position
+ *   @overload set_position(x, y, z)
+ *     @param [Float] x
+ *     @param [Float] y
+ *     @param [Float] z
+ *   @return [self]
+ */
 template <class T>
 static mrb_value
 sound_source_set_position(mrb_state *mrb, mrb_value self)
@@ -55,6 +75,11 @@ sound_source_set_position(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::SoundSource<T>
+ * @!method set_relative_to_listener(bool)
+ *   @param [Boolean] bool
+ *   @return [self]
+ */
 template <class T>
 static mrb_value
 sound_source_set_relative_to_listener(mrb_state *mrb, mrb_value self)
@@ -65,16 +90,26 @@ sound_source_set_relative_to_listener(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::SoundSource<T>
+ * @!method set_min_distance(distance)
+ *   @param [Float] distance
+ *   @return [self]
+ */
 template <class T>
 static mrb_value
 sound_source_set_min_distance(mrb_state *mrb, mrb_value self)
 {
-  mrb_float min_distance;
-  mrb_get_args(mrb, "f", &min_distance);
-  get_sound_source<T>(mrb, self)->setMinDistance(min_distance);
+  mrb_float distance;
+  mrb_get_args(mrb, "f", &distance);
+  get_sound_source<T>(mrb, self)->setMinDistance(distance);
   return self;
 }
 
+/* @!class SFML::SoundSource<T>
+ * @!method set_attenuation(attenuation)
+ *   @param [Float] attenuation
+ *   @return [self]
+ */
 template <class T>
 static mrb_value
 sound_source_set_attenuation(mrb_state *mrb, mrb_value self)
@@ -85,6 +120,10 @@ sound_source_set_attenuation(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::SoundSource<T>
+ * @!method get_pitch
+ *   @return [Float]
+ */
 template <class T>
 static mrb_value
 sound_source_get_pitch(mrb_state *mrb, mrb_value self)
@@ -92,6 +131,10 @@ sound_source_get_pitch(mrb_state *mrb, mrb_value self)
   return mrb_float_value(mrb, get_sound_source<T>(mrb, self)->getPitch());
 }
 
+/* @!class SFML::SoundSource<T>
+ * @!method get_volume
+ *   @return [Float]
+ */
 template <class T>
 static mrb_value
 sound_source_get_volume(mrb_state *mrb, mrb_value self)
@@ -99,6 +142,10 @@ sound_source_get_volume(mrb_state *mrb, mrb_value self)
   return mrb_float_value(mrb, get_sound_source<T>(mrb, self)->getVolume());
 }
 
+/* @!class SFML::SoundSource<T>
+ * @!method get_position
+ *   @return [SFML::Vector3f]
+ */
 template <class T>
 static mrb_value
 sound_source_get_position(mrb_state *mrb, mrb_value self)
@@ -106,6 +153,10 @@ sound_source_get_position(mrb_state *mrb, mrb_value self)
   return mrb_sfml_vector3f_value(mrb, get_sound_source<T>(mrb, self)->getPosition());
 }
 
+/* @!class SFML::SoundSource<T>
+ * @!method is_relative_to_listener
+ *   @return [Boolean]
+ */
 template <class T>
 static mrb_value
 sound_source_is_relative_to_listener(mrb_state *mrb, mrb_value self)
@@ -113,6 +164,10 @@ sound_source_is_relative_to_listener(mrb_state *mrb, mrb_value self)
   return mrb_bool_value(get_sound_source<T>(mrb, self)->isRelativeToListener());
 }
 
+/* @!class SFML::SoundSource<T>
+ * @!method get_min_distance
+ *   @return [Float]
+ */
 template <class T>
 static mrb_value
 sound_source_get_min_distance(mrb_state *mrb, mrb_value self)
@@ -120,6 +175,10 @@ sound_source_get_min_distance(mrb_state *mrb, mrb_value self)
   return mrb_float_value(mrb, get_sound_source<T>(mrb, self)->getMinDistance());
 }
 
+/* @!class SFML::SoundSource<T>
+ * @!method get_attenuation
+ *   @return [Float]
+ */
 template <class T>
 static mrb_value
 sound_source_get_attenuation(mrb_state *mrb, mrb_value self)
@@ -127,6 +186,8 @@ sound_source_get_attenuation(mrb_state *mrb, mrb_value self)
   return mrb_float_value(mrb, get_sound_source<T>(mrb, self)->getAttenuation());
 }
 
+/* @!class SFML::SoundSource<T>
+ */
 template <class T>
 static inline void
 mrb_sfml_sound_source_bind_class(mrb_state *mrb, struct RClass *cls)

@@ -19,6 +19,10 @@ get_sound_stream(mrb_state *mrb, mrb_value self)
   return cxx_mrb_data_get_ptr<T>(mrb, self);
 }
 
+/* @!class SFML::SoundStream<T>
+ * @!method play
+ *   @return [self]
+ */
 template <class T>
 static mrb_value
 sound_stream_play(mrb_state *mrb, mrb_value self)
@@ -27,6 +31,10 @@ sound_stream_play(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::SoundStream<T>
+ * @!method pause
+ *   @return [self]
+ */
 template <class T>
 static mrb_value
 sound_stream_pause(mrb_state *mrb, mrb_value self)
@@ -35,6 +43,10 @@ sound_stream_pause(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::SoundStream<T>
+ * @!method stop
+ *   @return [self]
+ */
 template <class T>
 static mrb_value
 sound_stream_stop(mrb_state *mrb, mrb_value self)
@@ -43,6 +55,10 @@ sound_stream_stop(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::SoundStream<T>
+ * @!method get_channel_count
+ *   @return [Integer]
+ */
 template <class T>
 static mrb_value
 sound_stream_get_channel_count(mrb_state *mrb, mrb_value self)
@@ -50,6 +66,10 @@ sound_stream_get_channel_count(mrb_state *mrb, mrb_value self)
   return mrb_fixnum_value(get_sound_stream<T>(mrb, self)->getChannelCount());
 }
 
+/* @!class SFML::SoundStream<T>
+ * @!method get_sample_rate
+ *   @return [Integer]
+ */
 template <class T>
 static mrb_value
 sound_stream_get_sample_rate(mrb_state *mrb, mrb_value self)
@@ -57,6 +77,10 @@ sound_stream_get_sample_rate(mrb_state *mrb, mrb_value self)
   return mrb_fixnum_value(get_sound_stream<T>(mrb, self)->getSampleRate());
 }
 
+/* @!class SFML::SoundStream<T>
+ * @!method get_status
+ *   @return [SFML::SoundSource::Status]
+ */
 template <class T>
 static mrb_value
 sound_stream_get_status(mrb_state *mrb, mrb_value self)
@@ -64,6 +88,11 @@ sound_stream_get_status(mrb_state *mrb, mrb_value self)
   return mrb_fixnum_value(get_sound_stream<T>(mrb, self)->getStatus());
 }
 
+/* @!class SFML::SoundStream<T>
+ * @!method set_playing_offset(time)
+ *   @param [SFML::Time] time
+ *   @return [self]
+ */
 template <class T>
 static mrb_value
 sound_stream_set_playing_offset(mrb_state *mrb, mrb_value self)
@@ -74,6 +103,10 @@ sound_stream_set_playing_offset(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::SoundStream<T>
+ * @!method get_playing_offset
+ *   @return [SFML::Time]
+ */
 template <class T>
 static mrb_value
 sound_stream_get_playing_offset(mrb_state *mrb, mrb_value self)
@@ -81,6 +114,11 @@ sound_stream_get_playing_offset(mrb_state *mrb, mrb_value self)
   return mrb_sfml_time_value(mrb, get_sound_stream<T>(mrb, self)->getPlayingOffset());
 }
 
+/* @!class SFML::SoundStream<T>
+ * @!method set_loop(bool)
+ *   @param [Boolean] bool
+ *   @return [self]
+ */
 template <class T>
 static mrb_value
 sound_stream_set_loop(mrb_state *mrb, mrb_value self)
@@ -91,6 +129,10 @@ sound_stream_set_loop(mrb_state *mrb, mrb_value self)
   return self;
 }
 
+/* @!class SFML::SoundStream<T>
+ * @!method get_loop
+ *   @return [Boolean]
+ */
 template <class T>
 static mrb_value
 sound_stream_get_loop(mrb_state *mrb, mrb_value self)
@@ -98,6 +140,8 @@ sound_stream_get_loop(mrb_state *mrb, mrb_value self)
   return mrb_bool_value(get_sound_stream<T>(mrb, self)->getLoop());
 }
 
+/* @!class SFML::SoundStream<T>
+ */
 template <class T>
 static inline void
 mrb_sfml_sound_stream_bind_class(mrb_state *mrb, struct RClass *cls)

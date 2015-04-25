@@ -1,4 +1,5 @@
 module SFML
+  # Storage for audio samples defining a sound
   class SoundBuffer < AlResource
     def initialize
     end

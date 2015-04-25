@@ -16,6 +16,7 @@ extern "C" const struct mrb_data_type mrb_sfml_music_type = { "sf::Music", music
 
 /* @!class SFML::Music
  * @!method initialize
+ *   @return [self]
  */
 static mrb_value
 music_initialize(mrb_state *mrb, mrb_value self)
@@ -28,6 +29,7 @@ music_initialize(mrb_state *mrb, mrb_value self)
 /* @!class SFML::Music
  * @!method open_from_file(filename)
  *   @param [String] filename
+ *   @return [self]
  */
 static mrb_value
 music_open_from_file(mrb_state *mrb, mrb_value self)
@@ -41,6 +43,7 @@ music_open_from_file(mrb_state *mrb, mrb_value self)
 /* @!class SFML::Music
  * @!method get_duration
  *   @return [Time]
+ *   @return [self]
  */
 static mrb_value
 music_get_duration(mrb_state *mrb, mrb_value self)
@@ -48,6 +51,8 @@ music_get_duration(mrb_state *mrb, mrb_value self)
   return mrb_sfml_time_value(mrb, mrb_sfml_music_ptr(mrb, self)->getDuration());
 }
 
+/* @!class SFML::Music
+ */
 extern "C" void
 mrb_sfml_music_init_bind(mrb_state *mrb, struct RClass *mod)
 {
