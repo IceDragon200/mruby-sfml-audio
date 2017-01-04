@@ -12,7 +12,7 @@
 
 static struct RClass *music_class;
 static mrb_data_free_func music_free = cxx_mrb_data_free<sf::Music>;
-extern "C" const struct mrb_data_type mrb_sfml_music_type = { "sf::Music", music_free };
+MRB_SFML_EXTERN const struct mrb_data_type mrb_sfml_music_type = { "sf::Music", music_free };
 
 /* @!class SFML::Music
  * @!method initialize
@@ -53,7 +53,7 @@ music_get_duration(mrb_state *mrb, mrb_value self)
 
 /* @!class SFML::Music
  */
-extern "C" void
+MRB_SFML_EXTERN void
 mrb_sfml_music_init_bind(mrb_state *mrb, struct RClass *mod)
 {
   music_class = mrb_define_class_under(mrb, mod, "Music", mrb_class_get_under(mrb, mod, "SoundStream"));

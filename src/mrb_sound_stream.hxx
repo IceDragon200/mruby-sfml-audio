@@ -7,10 +7,11 @@
 #include <mruby/numeric.h>
 #include <SFML/Audio/SoundStream.hpp>
 #include "mrb/cxx/helpers.hxx"
+#include "mrb/sfml/helpers.hxx"
 #include "mrb/sfml/system/time.hxx"
 #include "mrb_sound_source.hxx"
 
-extern "C" void mrb_sfml_sound_stream_init_bind(mrb_state *mrb, struct RClass *mod);
+MRB_SFML_EXTERN void mrb_sfml_sound_stream_init_bind(mrb_state *mrb, struct RClass *mod);
 
 template <class T>
 static inline T*

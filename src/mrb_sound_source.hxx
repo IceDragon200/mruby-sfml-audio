@@ -8,8 +8,9 @@
 #include <SFML/Audio/SoundSource.hpp>
 #include "mrb/cxx/helpers.hxx"
 #include "mrb/sfml/system/vector3.hxx"
+#include "mrb/sfml/helpers.hxx"
 
-extern "C" void mrb_sfml_sound_source_init_bind(mrb_state *mrb, struct RClass *mod);
+MRB_SFML_EXTERN void mrb_sfml_sound_source_init_bind(mrb_state *mrb, struct RClass *mod);
 
 template <class T>
 static inline T*

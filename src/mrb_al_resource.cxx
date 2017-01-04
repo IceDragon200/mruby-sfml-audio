@@ -6,7 +6,7 @@
 /* @!class SFML::AlResource
  * @abstract
  */
-extern "C" void
+MRB_SFML_EXTERN void
 mrb_sfml_al_resource_init_bind(mrb_state *mrb, struct RClass *mod)
 {
   mrb_define_class_under(mrb, mod, "AlResource", mrb->object_class);

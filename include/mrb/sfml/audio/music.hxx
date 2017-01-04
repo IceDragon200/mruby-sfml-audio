@@ -4,8 +4,9 @@
 #include <mruby.h>
 #include <mruby/data.h>
 #include <SFML/Audio/Music.hpp>
+#include "mrb/sfml/helpers.hxx"
 
-extern "C" const struct mrb_data_type mrb_sfml_music_type;
+MRB_SFML_EXTERN const struct mrb_data_type mrb_sfml_music_type;
 
 static inline sf::Music*
 mrb_sfml_music_ptr(mrb_state *mrb, mrb_value self)

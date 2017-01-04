@@ -141,7 +141,7 @@ listener_get_up_vector(mrb_state *mrb, mrb_value self)
 
 /* @!module SFML::Listener
  */
-extern "C" void
+MRB_SFML_EXTERN void
 mrb_sfml_listener_init_bind(mrb_state *mrb, struct RClass *mod)
 {
   listener_module = mrb_define_module_under(mrb, mod, "Listener");

@@ -6,7 +6,7 @@
 /* @class SFML::SoundStream
  * @abstract
  */
-extern "C" void
+MRB_SFML_EXTERN void
 mrb_sfml_sound_stream_init_bind(mrb_state *mrb, struct RClass *mod)
 {
   mrb_define_class_under(mrb, mod, "SoundStream", mrb_class_get_under(mrb, mod, "SoundSource"));

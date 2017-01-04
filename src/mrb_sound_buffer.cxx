@@ -11,9 +11,9 @@
 
 static struct RClass *sound_buffer_class;
 static mrb_data_free_func sound_buffer_free = cxx_mrb_data_free<sf::SoundBuffer>;
-extern "C" const struct mrb_data_type mrb_sfml_sound_buffer_type = { "sf::SoundBuffer", sound_buffer_free };
+MRB_SFML_EXTERN const struct mrb_data_type mrb_sfml_sound_buffer_type = { "sf::SoundBuffer", sound_buffer_free };
 
-extern "C" mrb_value
+MRB_SFML_EXTERN mrb_value
 mrb_sfml_sound_buffer_value(mrb_state *mrb, const sf::SoundBuffer& source)
 {
   mrb_value result = mrb_obj_new(mrb, sound_buffer_class, 0, NULL);
@@ -129,7 +129,7 @@ sound_buffer_get_duration(mrb_state *mrb, mrb_value self)
 
 /* @!class SFML::SoundBuffer
  */
-extern "C" void
+MRB_SFML_EXTERN void
 mrb_sfml_sound_buffer_init_bind(mrb_state *mrb, struct RClass *mod)
 {
   sound_buffer_class = mrb_define_class_under(mrb, mod, "SoundBuffer", mrb_class_get_under(mrb, mod, "AlResource"));

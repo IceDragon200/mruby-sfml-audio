@@ -6,7 +6,7 @@
 /* @class SFML::SoundSource
  * @abstract
  */
-extern "C" void
+MRB_SFML_EXTERN void
 mrb_sfml_sound_source_init_bind(mrb_state *mrb, struct RClass *mod)
 {
   struct RClass *sound_source_class = mrb_define_class_under(mrb, mod, "SoundSource", mrb_class_get_under(mrb, mod, "AlResource"));

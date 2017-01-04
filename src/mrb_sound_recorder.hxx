@@ -7,8 +7,9 @@
 #include <mruby/string.h>
 #include <SFML/Audio/SoundRecorder.hpp>
 #include "mrb/cxx/helpers.hxx"
+#include "mrb/sfml/helpers.hxx"
 
-extern "C" void mrb_sfml_sound_recorder_init_bind(mrb_state *mrb, struct RClass *mod);
+MRB_SFML_EXTERN void mrb_sfml_sound_recorder_init_bind(mrb_state *mrb, struct RClass *mod);
 
 template <class T>
 static inline T*
